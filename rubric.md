@@ -26,11 +26,11 @@ _____ 1 pt: `reflection.md` lists the classmates you consulted & TA hours attend
 
 **YES** 1 pt: Detects the requested set of mirror words (at minimum)
 
-_____ 1 pt: Replaces simple mirror words appropriately (unpunctuated, lowercase)
+**YES** 1 pt: Replaces simple mirror words appropriately (unpunctuated, lowercase)
 
 ### Level 3 (3 pts)
 
-_____ 1 pt: Makes all appropriate mirror replacements
+**YES** 1 pt: Makes all appropriate mirror replacements
 
 _____ 1 pt: Stores transcript of the conversation in an array
 
