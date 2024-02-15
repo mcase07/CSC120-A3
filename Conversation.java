@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 class Conversation {
 
@@ -13,8 +14,8 @@ class Conversation {
     // getting user input of # of lines
     String rounds = sc.nextLine();
     int numRounds = Integer.parseInt(rounds);
-    String [] transcript =  new String[2*numRounds];
 
+    // canned responses
     String[] canResponses = {
       "Oh, okay",
       "Mmhmm",
@@ -22,18 +23,20 @@ class Conversation {
       "Uh huh"
     };
 
-    //responding
+    // responding
     System.out.println("Okay, will do! What's up?");
+
+    // creating transcript array
+    ArrayList<String> transcript = new ArrayList<String>();
 
     // this is here to get around a type issue
     int i = 1;
-      // where t is the length of array transcript
+    // where t is the length of array transcript
     while (i <= numRounds && stillGoing) {
       // getting user input
       String userInput = sc.nextLine();
+      transcript.add(userInput);
       String [] splitInput = userInput.split("\\s+");
-      // transcript[t] = userInput;
-      // t++;
         if (userInput.contains("you")||userInput.contains("I")||userInput.contains("are")||userInput.contains("am")){
           for (int n = 0; n < splitInput.length; n++){
             if (splitInput[n].equals("you")){
@@ -54,10 +57,13 @@ class Conversation {
           }
           String reply = String.join(" ", splitInput);
           if (userInput.contains("?")){
+              transcript.add(reply);
               System.out.println(reply);
             }
           else{
-            System.out.println(reply + "?");
+            reply = reply + "?";
+            transcript.add(reply);
+            System.out.println(reply);
           }
         }
         else{
@@ -65,11 +71,16 @@ class Conversation {
           Random rand = new Random();
           int randomResponse = rand.nextInt(canResponses.length);
           String canReply = canResponses[randomResponse];
+          transcript.add(canReply);
           System.out.println(canReply);
         }
-        // transcript[t] = reply;
-        // t++;
       i++;
+    }
+
+    // outputting transcript one line at a time
+    System.out.println("\n" + "Here is a transcript of our conversation:");
+    for (String t : transcript){
+      System.out.println(t);
     }
     sc.close();
 
