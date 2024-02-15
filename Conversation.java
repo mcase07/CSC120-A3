@@ -16,15 +16,11 @@ class Conversation {
     String [] transcript =  new String[2*numRounds];
 
     String[] canResponses = {
-      "Okay!",
-      "So interesting.",
+      "Oh, okay",
+      "Mmhmm",
       "Oh, really?",
-      "I didn't know that!"
+      "Uh huh"
     };
-
-    // generates a random index used to choose a response from canResponses list
-    Random rand = new Random();
-    int randomResponse = rand.nextInt(canResponses.length);
 
     //responding
     System.out.println("Okay, will do! What's up?");
@@ -32,8 +28,6 @@ class Conversation {
     // this is here to get around a type issue
     int i = 1;
       // where t is the length of array transcript
-    int t = i * 2;
-
     while (i <= numRounds && stillGoing) {
       // getting user input
       String userInput = sc.nextLine();
@@ -42,8 +36,11 @@ class Conversation {
       // t++;
         if (userInput.contains("you")||userInput.contains("I")||userInput.contains("are")||userInput.contains("am")){
           for (int n = 0; n < splitInput.length; n++){
-            if (splitInput[n].equals("you") || splitInput[n].equals("you?")){
+            if (splitInput[n].equals("you")){
               splitInput[n] = "I";
+            }
+            else if (splitInput[n].equals("you?")){
+              splitInput[n] = "I?";
             }
             else if (splitInput[n].equals("I")|| splitInput[n].equals("i")){
               splitInput[n] = "you";
@@ -56,10 +53,19 @@ class Conversation {
             }
           }
           String reply = String.join(" ", splitInput);
-          System.out.println(reply + "?");
+          if (userInput.contains("?")){
+              System.out.println(reply);
+            }
+          else{
+            System.out.println(reply + "?");
+          }
         }
         else{
-          System.out.println(canResponses[randomResponse]);
+          // generates a random index used to choose a response from canResponses list
+          Random rand = new Random();
+          int randomResponse = rand.nextInt(canResponses.length);
+          String canReply = canResponses[randomResponse];
+          System.out.println(canReply);
         }
         // transcript[t] = reply;
         // t++;
